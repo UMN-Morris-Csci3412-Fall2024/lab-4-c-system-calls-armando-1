@@ -11,11 +11,10 @@ static int num_dirs = 0;
 static int num_regular = 0;
 
 bool is_dir(const char *path) {
-  
+  // will checks if the given path has directory to use
     struct stat path_stat;
     if (stat(path, &path_stat) != 0) {
-        fprintf(stderr, "Error accessing %s: %s\n", path, strerror(errno));
-        return false;
+        return false;// will use stat() to see if it fails
     }
     return S_ISDIR(path_stat.st_mode);
 
@@ -38,8 +37,7 @@ void process_directory(const char *path) {
    
     DIR *dir = opendir(path);
     if (!dir) {
-        fprintf(stderr, "Could not open directory %s: %s\n", path, strerror(errno));
-        return;
+        return;// if there is a problem with opening and fails
     }
 
     num_dirs++;  
