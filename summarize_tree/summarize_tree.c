@@ -39,22 +39,16 @@ void process_directory(const char *path) {
     if (!dir) {
         return;// if there is a problem with opening and fails
     }
-
     num_dirs++;  
-
     for (struct dirent *entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
-
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
             continue;
         }
-
         char full_path[PATH_MAX];
         snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
-
         process_path(full_path);
         
     }
-
     closedir(dir);  
 }
   /*
